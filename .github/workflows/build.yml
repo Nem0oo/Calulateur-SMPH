@@ -46,4 +46,4 @@ jobs:
 
       - name: Deploy via SSH
         run: |
-          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SERVER_USERNAME }}@${{ secrets.URL_SERVER }} './srv/smph/update-carbo.sh'
+          ssh -i ~/.ssh/id_ed25519 ${{ secrets.SERVER_USERNAME }}@${{ secrets.URL_SERVER }} './srv/smph/update-smph.sh'
