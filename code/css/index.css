@@ -1,0 +1,286 @@
+/*----------------------------------------------------------------------------*/
+/* index.css : CSS for AlchemyOverlord web page                               */
+/* Written by John-Paul Hosom                                                 */
+/* Version 1.0 : January 30, 2017                                             */
+/* Version 1.1 : November 25, 2021                                            */
+/*----------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------*/
+/* top-level definitions */
+
+html {
+  color: black;
+  height: 100%;
+}
+
+body {
+  margin: 1ex;
+  height: 96%;
+  font-size: 100%;
+  font-family: sans-serif;
+  line-height: 120%;
+}
+
+/*----------------------------------------------------------------------------*/
+/* define entire banner, composed of banner (name with background) and */
+/* subbanner (tag line) */
+
+#banner {
+    background: url("../img/alchemyoverlord-light.png");
+    background-size: 7.0em auto;
+    background-attachment: fixed;
+    background-repeat: repeat-x;
+    color: black;
+    width: 100%;
+    text-align: left;
+    text-indent: 1.00ex;
+    font-family: Book Antiqua,Palatino,Palatino Linotype,Palatino LT STD,Georgia,serif;
+    font-style: italic;
+    font-size: 3.0em;
+    font-weight: bold;
+    border-width: 1;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    line-height: 120%;
+}
+
+#subbanner {
+    color: black;
+    width: 100%;
+    text-align: left;
+    text-indent: 3.00ex;
+    letter-spacing: 0.1ex;
+    font-family: Book Antiqua,Palatino,Palatino Linotype,Palatino LT STD,Georgia,serif;
+    font-size: 1.0em;
+    padding-bottom: 0.5ex;
+    border-width: 1;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    line-height: 120%;
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* define horizontal menu */
+
+#horizontalMenuList {
+    width: 100.2%;
+    font-size: 0.9em;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color:  #2e4053;
+}
+
+#horizontalMenuItem {
+    float: left;
+    border-right:1px solid  #cacfd2;
+}
+
+#horizontalMenuItem:last-child {
+    border-right: none;
+    border-left:1px solid #cacfd2;
+}
+
+#horizontalMenuItem a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 1ex 2ex;
+    text-decoration: none;
+}
+
+#horizontalMenuItem a:hover:not(.active) {
+    background-color: black;
+}
+
+/*----------------------------------------------------------------------------*/
+/* define left-hand vertical menu */
+
+#verticalMenuList {
+    list-style-type: none;
+    margin: 0;
+    padding-top: 2ex;
+    padding-left: 0;
+    padding-right: 0;
+    border-right:1px solid lightgrey;
+    width: 15ex;
+    height: 100%;
+    background-color: #ebebf2;
+    position: absolute;
+    height: calc(100% - 2.0em);
+    overflow: auto;
+}
+
+#verticalMenuItem {
+    display: block;
+    padding: 1.25ex 2ex;
+    border-bottom:1px solid lightgrey;
+}
+
+#verticalMenuItem a {
+    display: block;
+    color: black;
+    text-decoration: none;
+}
+
+#verticalMenuItem a:hover:not(.active) {
+    background-color: #2e4053;
+    color: white;
+}
+
+/*----------------------------------------------------------------------------*/
+/* define iframe properties */
+
+#iframeBottom {
+  width: 100%;
+  padding:1ex 0;
+  border:0px;
+  height: calc(100% - 8.5em);
+  overflow:hidden;
+  }
+
+#iframeRight {
+  width: calc(100% - 17ex);
+  margin-left:17ex;
+  padding:1ex 0;
+  border:0px;
+  height: 100%;
+  overflow:hidden;
+  }
+
+#content {
+  width: 100%;
+  }
+
+#footnote {
+  font-size: 80%;
+  line-height: 120%;
+  }
+  
+
+/*----------------------------------------------------------------------------*/
+/* define select option for yeast flocculation */
+
+#ibu.flocculation {
+	width:11em;
+	min-width:11em;
+	max-width:11em;
+}
+
+.smallInput {
+  width: 5em;
+}
+.mediumInput {
+  width: 8em;
+}
+
+/*----------------------------------------------------------------------------*/
+/* define table of hops additions */
+
+#hopsAdditionsTable {
+  border-spacing: 1em 0;
+}
+
+/*----------------------------------------------------------------------------*/
+/* define dropdown button(s) */
+.dropbtn {
+  cursor: pointer;
+  border: solid;
+  border-width: 1px;
+  border-color: silver;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.dropbtn:hover {
+  background-color:  #BAC8D1;
+}
+
+/*
+.dropbtn:active {
+}
+*/
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+
+.dropdown-content {
+  display: none;
+  overflow: visible;
+  position: absolute;
+  min-width: 12em;
+  z-index: 1;
+  background-color: #ffffff;
+  box-shadow: 8px 8px 16px 8px rgba(0,0,0,0.5);
+}
+
+/* any ID beginning with 'letter' (i.e. the dropdown buttons for */
+/* selecting hop varities) should have min width 4em for good spacing */
+div[id^="letter"] {
+  min-width:4em;
+}
+
+.show {display: block;}
+
+
+
+/*----------------------------------------------------------------------------*/
+/* define table of outputs */
+
+.outputTableCellName {
+  width:25ex;
+}
+.outputTableCellValue {
+  width:11.5ex;
+  background:lightgray;
+}
+.outputTableTotalName {
+  width:15ex;
+}
+.outputTableTotalValue {
+  width:11.5ex;
+  background:lightgray;
+}
+
+.tableAlternatingGray {
+  tr:nth-of-type(odd) {
+    background-color:#dde;
+  }
+}
+
+/*----------------------------------------------------------------------------*/
+/* for perceptual-comparison page, define tables */
+
+.diffTestTableName {
+  table-layout: fixed;
+  // border: 1px solid red;
+}
+
+.diffTestTableLeftItem {
+  // border: 1px solid blue;
+  padding: 0px 1em 0px 0em;
+  width: 20%
+}
+
+.diffTestTableCenterItem {
+  // border: 1px solid grey;
+}
+.diffTestTableRightItem {
+  // border: 1px solid blue;
+  padding: 0px 0em 0px 1em;
+  width: 20%
+}
+
+#diffTest.sim2AFC {
+	width:5em;
+  background:red;
+	min-width:5em;
+	max-width:5em;
+}

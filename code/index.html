@@ -1,0 +1,324 @@
+<meta http-equiv="Content-Type" content="text/html;charset=ISO-8859-1">
+<html>
+
+<head>
+  <link rel="stylesheet" type="text/css" href="css/index.css">
+  <link rel="stylesheet" type="text/css" href="css/mobile.css">
+  <link rel="stylesheet" type="text/css" href="css/menu.css">
+  <link rel="shortcut icon" type="image/png" href="img/headshot.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+</head>
+
+<body>
+
+  <a name="top_SMPH"></a>
+  <div id="content">
+    <h1>Calculateur IBU SMPH</h1>
+    
+    <div class="topnav" id="myTopnav">
+      <a href="index.html" class="active">Calculateur</a>
+      <a href="ibu_SMPH_FAQ.html">FAQ</a>
+      <a href="https://jphosom.github.io/alchemyoverlord/ibu_SMPH.html">Site original</a>
+    </div>
+
+    <h2>Entr&eacute;es:</h2>
+    <p hidden>
+      <!--<b>Global:</b>-->
+      Input Units:
+      <input type="radio" value="metric" id="metric" name="ibu.units" onclick="common.set(ibu.units,1)"
+        autocomplete="off" checked> metric
+      Boiling Point of Water (<span id="boilTempUnits">&deg;F</span>):<input type="number" autocomplete="off"
+        STYLE="text-align:left" id="ibu.boilTemp" onchange="common.set(ibu.boilTemp, 1)">
+    </p>
+
+    <p>
+      <b>Cuve:</b>
+    <div class="container">
+      <div>
+        <label for="ibu.kettleDiameter">Diam&egrave;tre de cuve (<span id="kettleDiameterUnits">inches</span>)
+        </label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.kettleDiameter"
+          onchange="common.set(ibu.kettleDiameter, 1)" hint="(pour la surface d'exposition du mout)">
+      </div>
+      <div hidden>Kettle Opening Diameter (<span id="kettleOpeningUnits">inches</span>):
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.kettleOpening"
+          onchange="common.set(ibu.kettleOpening, 1)"> (often same as kettle diameter)
+      </div>
+    </div>
+    </p>
+
+    <p>
+      <b>Mout:</b>
+    <div class="container">
+      <div>
+        <label for="ibu.boilTime">
+          Dur&eacute;e d'&eacute;bullition (minutes)
+        </label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.boilTime"
+          onchange="common.set(ibu.boilTime, 1)">
+      </div>
+      <div>
+        <label for="ibu.evaporationRate">
+          Vitesse d'&eacute;vaporation (<span id="evaporationUnits">G/hr</span>)
+        </label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.evaporationRate"
+          onchange="common.set(ibu.evaporationRate, 1)">
+        <div>
+          <label for="ibu.wortVolume">
+            Volume de mout (<span id="wortVolumeUnits">G</span> &agrave; temp&eacute;rature ambiante.)
+          </label>
+          <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.wortVolume"
+            onchange="common.set(ibu.wortVolume, 1)">
+          <input type="radio" value="preBoilVol" id="preBoilVol" name="ibu.preOrPostBoilVol"
+            onclick="common.set(ibu.preOrPostBoilVol,1)" autocomplete="off">Avant &eacute;bu
+          <input type="radio" value="postBoilVol" id="postBoilVol" name="ibu.preOrPostBoilVol"
+            onclick="common.set(ibu.preOrPostBoilVol,1)" autocomplete="off" checked>Apr&egrave;s &eacute;bu
+        </div>
+        <div>
+          <label for="">
+            (Apr&egrave;s &eacute;bullition) Densit&eacute; initiale
+          </label>
+          <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.OG" onchange="common.set(ibu.OG, 1)">
+        </div>
+        <div>
+          <label for="">
+            Perte dans la cuve (<span id="wortLossUnits">G</span>)
+          </label>
+          <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.wortLossVolume"
+            onchange="common.set(ibu.wortLossVolume, 1)">
+        </div>
+        <div>
+          <label for="">
+            (Ebullition partielle) Eau ajout&eacute;e (<span id="topoffUnits">G</span>)
+          </label>
+          <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.topoffVolume"
+            onchange="common.set(ibu.topoffVolume, 1)">
+        </div>
+      </div>
+    </div>
+    </p>
+
+    <p>
+      <b>Houblons:</b>
+    <div class="container">
+      <div>
+        <label for="ibu.numAdditions">Nombre d'ajout de houblon: </label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.numAdditions"
+          onchange="common.set(ibu.numAdditions,1)">
+      </div>
+      <div>
+        <label for="ibu.scalingFactor">Global IBU Scaling Factor:</label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.scalingFactor"
+          onchange="common.set(ibu.scalingFactor,1)"></td>
+      </div>
+      <div>
+        <label for="ibu.defaultHopForm">Format de houblon par d&eacute;faut</label>
+        <select style="width:8em;" id="ibu.defaultHopForm" onchange="common.set(ibu.defaultHopForm, 1)">
+          <option value="cones" selected>cones</option>
+          <option value="pellets">pellets</option>
+        </select>
+      </div>
+      </p>
+
+      <p hidden style="margin-left:3em">
+        <span id="solubilityLimitColor">
+          <input type="checkbox" id="ibu.applySolubilityLimitCheckbox"
+            onchange="common.set(ibu.applySolubilityLimitCheckbox,1)"> Apply
+          <a href="blog/14-hopping-rate-correction-based-on-alpha-acid-solubility/alchemyoverlord-blog-content14.html">
+            alpha-acid solubility-limit correction</a>
+        </span>
+        <br>
+        <span id="pHColor">
+          <input type="checkbox" id="ibu.pHCheckbox" onchange="common.set(ibu.pHCheckbox,1)"> Appliquer
+          <a href="blog/19-the-effect-of-ph-on-utilization-and-ibus/alchemyoverlord-blog-content19.html">
+            la correction du PH</a> avec le pH du mout =
+          <input type="number" autocomplete="off" STYLE="text-align:left; color:#b1b1cd" size=4 id="ibu.pH"
+            onchange="common.set(ibu.pH, 1)">
+          <input type="radio" value="preBoilpH" id="preBoilpH" name="ibu.preOrPostBoilpH"
+            onclick="common.set(ibu.preOrPostBoilpH,1)" autocomplete="off">pre-boil or
+          <input type="radio" value="postBoilpH" id="postBoilpH" name="ibu.preOrPostBoilpH"
+            onclick="common.set(ibu.preOrPostBoilpH,1)" autocomplete="off" checked>post-boil
+        </span>
+        <br>
+        <span id="useDryHopModel">
+          <input type="checkbox" id="ibu.useDryHopModelCheckbox" onchange="common.set(ibu.useDryHopModelCheckbox,1)">
+          Model IBUs of dry-hop additions (this model provides only a rough approximation)
+        </span>
+        <br>
+        Specify hop alpha-acid decay using:
+        <input type="radio" id="decaySpecify" value="decaySpecify" name="ibu.hopDecayMethod"
+          onclick="common.set(ibu.hopDecayMethod,1)" autocomplete="off">storage conditions
+        <input type="radio" id="decayFactor" value="decayFactor" name="ibu.hopDecayMethod"
+          onclick="common.set(ibu.hopDecayMethod,1)" autocomplete="off" checked>freshness factor
+      </p>
+
+
+      <div id="hopsAdditionsTableDiv">
+      </div>
+
+      <p hidden>
+        <b>Post-Boil Temperature Decrease:</b><br>
+        <span style="margin-left:3em">
+          Post-Boil Wort Temperature Decay Function:
+          <input type="radio" id="tempDecayLinear" value="tempDecayLinear" name="ibu.tempDecayType"
+            onclick="common.set(ibu.tempDecayType,1)" autocomplete="off">linear or
+          <input type="radio" id="tempDecayExponential" value="tempDecayExponential" name="ibu.tempDecayType"
+            onclick="common.set(ibu.tempDecayType,1)" autocomplete="off" checked>exponential decay
+          <br>
+        </span>
+        <span style="margin-left:3em">
+          &emsp;&emsp;
+          temperature (<span id="tempUnits">&deg;F</span>) = <span id="tempDecayFormula">TO_BE_CHANGED</span>
+        </span>
+      </p>
+
+      <p>
+        <label for="ibu.whirlpoolTime">Dur&eacute;e du whirlpool et /ou Hop Stand (minutes)</label>
+        <span id="whirlpoolTimeField"><input type="number" STYLE="text-align:right" , size=4 autocomplete="off"
+            id="ibu.whirlpoolTime" onchange="common.set(ibu.whirlpoolTime, 1)"></span><br>
+        <span id="holdTempColor" style="color:#b1b1cd">
+          <input type="checkbox" id="ibu.holdTempCheckbox"
+            onchange="common.set(ibu.holdTempCheckbox, 1)">Temp&eacute;rature de hopstand (<span
+            id="holdTempUnits">&deg;F</span>)<input type="number" autocomplete="off"
+            STYLE="text-align:left; color:#b1b1cd" size=4 id="ibu.holdTemp" onchange="common.set(ibu.holdTemp, 1)"><br>
+        </span>
+      </p>
+
+      <p>M&eacute;thode de refroidissement forc&eacute;e:<br>
+        <input type="radio" id="forcedDecayImmersion" value="forcedDecayImmersion" name="ibu.forcedDecayType"
+          onclick="common.set(ibu.forcedDecayType,1)" autocomplete="off" checked>Refroidisseur immerg&eacute; (exponential decay
+        factor) <span id="forcedDecayImmersionFactor"><input type="number" STYLE="text-align:right" size=5
+            autocomplete="off" id="ibu.immersionDecayFactor"
+            onchange="common.set(ibu.immersionDecayFactor,1)"></span><br>
+        <input type="radio" id="forcedDecayCounterflow" value="forcedDecayCounterflow" name="ibu.forcedDecayType"
+          onclick="common.set(ibu.forcedDecayType,1)" autocomplete="off">Refroidisseur &agrave; contre-courant (vitesse de circulation du mout <span
+          id="rateUnits">gallons/min</span>)<span id="forcedDecayCounterflowRate"><input type="number"
+            STYLE="text-align:right" size=5 autocomplete="off" id="ibu.counterflowRate"
+            onchange="common.set(ibu.counterflowRate,1)"></span><br>
+        <input type="radio" id="forcedDecayIcebath" value="forcedDecayIcebath" name="ibu.forcedDecayType"
+          onclick="common.set(ibu.forcedDecayType,1)" autocomplete="off">Bain marie froid (exponential decay factor)<span
+          id="forcedDecayIcebathFactor"><input type="number" STYLE="text-align:right" size=5 autocomplete="off"
+            id="ibu.icebathDecayFactor" onchange="common.set(ibu.icebathDecayFactor,1)"></span><br>
+      </p>
+    </div>
+    <p>
+      <b>Fermentation et conditionnement:</b>
+    <div class="container">
+      <div>
+        <label for="ibu.fermentorVolume">Volume d'ensemencement (<span id="fermentorVolumeUnits">G</span>):</label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.fermentorVolume"
+          onchange="common.set(ibu.fermentorVolume, 1)">
+      </div>
+      <div>
+        <label for="ibu.wortClarity">Claret&eacute; du mout dans le fermenteur :</label>
+        <select style="width:17em;" id="ibu.wortClarity" onchange="common.set(ibu.wortClarity, 1)">
+          <option value="very clear">tr&egrave;s clair</option>
+          <option value="clear">clair</option>
+          <option value="somewhat clear">&agrave peu pr&ecirc;t clair</option>
+          <option value="average (default)" selected>moyen (defaut)</option>
+          <option value="somewhat cloudy">un peu trouble</option>
+          <option value="cloudy">trouble</option>
+          <option value="very cloudy">tr&egrave;s trouble</option>
+          <option value="extremely cloudy">extr&egrave;mement trouble</option>
+        </select>
+      </div>
+      <div>
+        <label for="ibu.krausen">Perte du krausen:</label>
+        <select style="width:24em;" id="ibu.krausen" onchange="common.set(ibu.krausen, 1)">
+          <option value="mix krausen back in; no loss">mix krausen back in; no loss</option>
+          <option value="minor krausen deposits on FV">minor krausen deposits on FV</option>
+          <option value="medium krausen deposits on FV (default)" selected>medium krausen deposits on FV (default)
+          </option>
+          <option value="heavy krausen deposits on FV">heavy krausen deposits on FV</option>
+          <option value="very heavy krausen deposits on FV">very heavy krausen deposits on FV</option>
+          <option value="blow off krausen with slow fermentation">blow off krausen with slow fermentation</option>
+          <option value="blow off krausen with normal fermentation">blow off krausen with normal fermentation</option>
+          <option value="blow off krausen with vigorous fermentation">blow off krausen with vigorous fermentation
+          </option>
+        </select>
+      </div>
+      <div>
+        <label for="ibu.flocculation">Flocculation de la levure:</label>
+        <select style="width:11em;" id="ibu.flocculation" onchange="common.set(ibu.flocculation, 1)">
+          <option value="high">haut</option>
+          <option value="medium" selected>moyen</option>
+          <option value="low">faible</option>
+        </select>
+      </div>
+      <div>
+        <label for="ibu.finingsAmount">Finings:</label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.finingsAmount"
+          onchange="common.set(ibu.finingsAmount, 1)">
+        <span id="finingsUnits">tsp</span> of
+        <select style="width:10em;" id="ibu.finingsType" onchange="common.set(ibu.finingsType, 1)">
+          <option value="nothing" selected>nothing</option>
+          <option value="gelatin">gelatin</option>
+        </select>
+      </div>
+      <div>
+        <label for="ibu.filtering">Filtering (micron rating):</label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.filtering"
+          onchange="common.set(ibu.filtering, 1)">
+      </div>
+      <div>
+        <label for="ibu.beerAge_days">Beer Age (days at room temp.):</label>
+        <input type="number" autocomplete="off" STYLE="text-align:left" id="ibu.beerAge_days"
+          onchange="common.set(ibu.beerAge_days, 1)">
+      </div>
+    </div>
+
+    <h2>R&eacute;sultats:</h2>
+    <div id="outputTableDiv">
+    </div>
+    <table style="margin-left:3em">
+      <tr>
+        <td><span id="forcedCoolingTimeHT"></span></td>
+      </tr>
+      <tr>
+        <td><span id="forcedCoolingTime"></span></td>
+      </tr>
+      <tr>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+  <script type="text/javascript" src="js/common.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/hops.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/ibu.js" charset="utf-8"></script>
+  <script type="text/javascript" src="js/ibu_SMPH.js" charset="utf-8"></script>
+
+  <script>
+    SMPH.initialize_SMPH();
+  </script>
+
+  <br>
+  <hr>
+  <h2>Sauvegarder et charger:</h2>
+  <table style="margin-left:3em">
+    <tbody>
+      <tr>
+        <td>Sauvegarder dans un fichier:</td>
+        <td><button type="button" onclick="common.saveToFile('IBU_SMPH.txt')">Parcourir... </button></td>
+      </tr>
+      <tr>
+        <td>Charger un fichier:</td>
+        <td><input type="file" accept=".txt" id="files" onchange="common.loadFromFile(this.files)" /></td>
+      </tr>
+    </tbody>
+  </table>
+  <br>
+  <hr>
+  <p>
+    <center>
+      Se rendre:<br>
+      <a href="#top_SMPH">Haut de la page</a>
+      <p>
+      <p>
+        Reset:
+        <button type="button" onclick="common.clearSavedValues()"> Vider les donn&eacute;es </button>
+    </center>
+</body>
+
+</html>
