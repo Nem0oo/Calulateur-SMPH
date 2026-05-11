@@ -55,6 +55,6 @@ jobs:
     needs: build_and_push_to_docker_hub
     runs-on: ubuntu-latest
     steps:
-      - name: Trigger watchtower pull
+      - name: Trigger deploy via n8n
         run: |
-          curl -H "Authorization: Bearer ${{ secrets.WATCHTOWER_TOKEN }}" "http://${{ secrets.URL_SERVER }}:8080/v1/update?image=monuser/smph"
+          curl -X POST -H "Content-Type: application/json" "https://n8n.gcourtot.fr/webhook/${{ secrets.N8N_WEBHOOK_ID }}"
