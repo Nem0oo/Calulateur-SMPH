@@ -48,7 +48,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:sha-${{ github.sha }} --all-tags
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:sha-${{ github.sha }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest
 
   trigger_watchtower:
     if: github.event_name == 'push'
