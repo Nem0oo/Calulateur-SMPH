@@ -21,7 +21,7 @@ jobs:
           docker build -t smph .
       - name: Running container
         run: |
-          docker run --rm smph
+          docker run -d --name smph -p 8080:80 smph
       - name: Wait for Apache
         run: sleep 2
       - name: Test title
