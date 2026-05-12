@@ -8,6 +8,10 @@ Live at: **https://smph.gcourtot.fr**
 
 While using my Grainfather app to prepare my recipe, I noticed that late hop additions were not accounted for in the IBU estimation. Asking around I found out about the SMPH method and decided I could make it a web app.
 
+<p align="center">
+  <img src="smph_ibu_calc.jpg" width="45%"/>
+</p>
+
 ## What it does
 
 - Calculates IBUs using the SMPH model
