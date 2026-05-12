@@ -84,7 +84,7 @@ jobs:
       
   trigger_rollback:
     needs: [test_prod, build_and_push_to_docker_hub]
-    if: needs.test_prod.result == 'failure'
+    if: always() && needs.test_prod.result == 'failure'
     runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
