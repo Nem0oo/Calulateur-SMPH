@@ -35,27 +35,24 @@ jobs:
     if: github.event_name == 'push'
     name: Build Docker Image with tags
     runs-on: ubuntu-latest
-    outputs:
-      previous_sha: ${{ steps.get_sha.outputs.previous_sha }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-      - name: Get previous SHA
-        id: get_sha
-        run: echo "previous_sha=$(git log --skip=1 -1 --format='%H')" >> $GITHUB_OUTPUT
-      - name: Build Docker image
-        run: |
-          docker build --build-arg SHA=fakesha2 -t ${{ secrets.DOCKERHUB_USERNAME }}/smph:sha-${{ github.sha }} -t ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest .
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Tag previous
+        run: |
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest ${{ secrets.DOCKERHUB_USERNAME }}/smph:previous
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:previous
+      - name: Build Docker image
+        run: |
+          docker build --build-arg SHA=fakesha3 -t ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest .
       - name: Push Docker image
         run: |
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:sha-${{ github.sha }}
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest
 
   trigger_watchtower:
@@ -96,9 +93,8 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Rollback image
         run: |
-          PREVIOUS_SHA=${{ needs.build_and_push_to_docker_hub.outputs.previous_sha }}
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/smph:sha-$PREVIOUS_SHA
-          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/smph:sha-$PREVIOUS_SHA ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/smph:previous
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/smph:previous ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest
       - name: Trigger deploy via n8n
         run: |
