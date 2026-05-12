@@ -45,9 +45,9 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Tag previous
         run: |
-          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest
-          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest ${{ secrets.DOCKERHUB_USERNAME }}/smph:previous
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:previous
+          docker pull ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest && \
+          docker tag ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest ${{ secrets.DOCKERHUB_USERNAME }}/smph:previous && \
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/smph:previous || true
       - name: Build Docker image
         run: |
           docker build --build-arg SHA=${{ github.sha }} -t ${{ secrets.DOCKERHUB_USERNAME }}/smph:latest .
